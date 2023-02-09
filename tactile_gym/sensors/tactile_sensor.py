@@ -137,7 +137,13 @@ class TactileSensor:
             if self.t_s_type in ["standard", "right_angle", "forward"]:
                 self.focal_dist = 0.0015
                 self.fov = 40
+
         elif self.t_s_name == 'digitac':
+            if self.t_s_type in ["standard", "right_angle", "forward"]:
+                self.focal_dist = 0.0015
+                self.fov = 40
+
+        elif self.t_s_name == 'mini':
             if self.t_s_type in ["standard", "right_angle", "forward"]:
                 self.focal_dist = 0.0015
                 self.fov = 40
@@ -173,7 +179,16 @@ class TactileSensor:
             elif self.t_s_type in ["right_angle", "forward"]:
                 cam_pos = (-0.00095, .0139, 0.005)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+
         elif self.t_s_name == 'digitac':
+            if self.t_s_type in ["standard"]:
+                cam_pos = (-0.00095, .0139, 0.020)
+                cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+            elif self.t_s_type in ["right_angle", "forward"]:
+                cam_pos = (-0.00095, .0139, 0.005)
+                cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+
+        elif self.t_s_name == 'mini':
             if self.t_s_type in ["standard"]:
                 cam_pos = (-0.00095, .0139, 0.020)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)

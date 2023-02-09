@@ -145,6 +145,22 @@ rest_poses_dict = {
                 0.00,  # tactip_ee_joint     (fixed)
                 0.00,  # tactip_tip_to_body (fixed)
                 0.00   # tcp_joint           (fixed)
+            ]),  
+        },      
+        "mini": {
+            "standard": np.array([
+                0.00,  # world_joint         (fixed)
+                3.21456,  # panda_joint1     (revolute)
+                1.30233,  # panda_joint2     (revolute)
+                2.99673,  # panda_joint3     (revolute)
+                0.83832,  # panda_joint4     (revolute)
+                -2.97647,  # panda_joint5    (revolute)
+                2.13176,  # panda_joint6     (revolute)
+                4.65986,  # panda_joint7     (revolute)
+                0.00,  # ee_joint            (fixed)
+                0.00,  # tactip_ee_joint     (fixed)
+                0.00,  # tactip_tip_to_body (fixed)
+                0.00   # tcp_joint           (fixed)
             ]),
         },
     },
