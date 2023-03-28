@@ -3,9 +3,9 @@
      Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot
-  name="digit_asmb">
+  name="gsmini_asmb">
   <link
-    name="digit_body">
+    name="gsmini_body">
     <inertial>
       <origin
         xyz="0.00443338071044421 -0.0140914049333968 4.96453152977634E-09"
@@ -26,7 +26,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://digit_asmb/meshes/digit_body.STL" />
+          filename="package://gelsight_mini_asmb/meshes/gsmini_body.STL" />
       </geometry>
       <material
         name="">
@@ -40,12 +40,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://digit_asmb/meshes/digit_body.STL" />
+          filename="package://gelsight_mini_asmb/meshes/gsmini_body.STL" />
       </geometry>
     </collision>
   </link>
   <link
-    name="digit_core">
+    name="gsmini_core">
     <inertial>
       <origin
         xyz="-2.15568578500849E-07 0.00554133274527847 -0.00576051345741577"
@@ -66,7 +66,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://digit_asmb/meshes/digit_core.STL" />
+          filename="package://gelsight_mini_asmb/meshes/gsmini_core.STL" />
       </geometry>
       <material
         name="">
@@ -80,12 +80,12 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://digit_asmb/meshes/digit_core.STL" />
+          filename="package://gelsight_mini_asmb/meshes/gsmini_core.STL" />
       </geometry>
     </collision>
   </link>
   <joint
-    name="digit_body_core_link"
+    name="gsmini_body_core_link"
     type="fixed">
     <origin
       xyz="-0.00151521951809463 -1.36251105150219E-05 -0.00415"
