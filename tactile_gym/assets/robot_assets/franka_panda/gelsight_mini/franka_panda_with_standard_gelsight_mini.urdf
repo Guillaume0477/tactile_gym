@@ -280,7 +280,7 @@
 
   <!-- GelSight Mini -->
   <link
-    name="gsmini_body_link">
+    name="gelsight_mini_body_link">
     <inertial>
       <origin
         xyz="0.00443338071044421 -0.0140914049333968 4.96453152977634E-09+0.035"
@@ -300,10 +300,10 @@
         xyz="0 0 0.035"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gsmini_body.STL" />
+        <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_body.STL" />
       </geometry>
       <material
-        name="gsmini_body">
+        name="gelsight_mini_body">
         <color
           rgba="0.0 0.0 0.0 1" />
       </material>
@@ -313,18 +313,18 @@
         xyz="0 0 0.035"
         rpy="0 0 0" />
       <geometry>
-        <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gsmini_body.STL" />
+        <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_body.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="dgsmini_ee_joint" type="fixed">
+  <joint name="dgelsight_mini_ee_joint" type="fixed">
     <parent link="ee_link"/>
-    <child link="gsmini_body_link"/>
+    <child link="gelsight_mini_body_link"/>
     <origin rpy="0.0 0.0 -1.57" xyz="0.0 0.0 0.0"/>
   </joint>
 
-  <link name="gsmini_tip_link">
+  <link name="gelsight_mini_tip_link">
     <inertial>
       <origin
         xyz="-2.15568578500849E-07 0.00554133274527847 -0.00576051345741577-0.035"
@@ -345,10 +345,10 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb_hollow/meshes/gsmini_core.STL" scale="1.0 1.0 1.0"/>
+          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb_hollow/meshes/gelsight_mini_core.STL" scale="1.0 1.0 1.0"/>
       </geometry>
       <material
-        name="gsmini_skin">
+        name="gelsight_mini_skin">
         <color
           rgba="1.0 1.0 1.0 1" />
       </material>
@@ -359,17 +359,17 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gsmini_core.STL" />
+          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_core.STL" />
       </geometry>
     </collision>
   </link>
 
-  <joint name="gsmini_tip_to_body" type="fixed">
+  <joint name="gelsight_mini_tip_to_body" type="fixed">
     <origin
       xyz="-0.00151521951809463 -1.36251105150219E-05 -0.00415"
       rpy="-3.14159265358979 0 1.5707963267949" />
-    <parent link="gsmini_body_link" />
-    <child link="gsmini_tip_link" />
+    <parent link="gelsight_mini_body_link" />
+    <child link="gelsight_mini_tip_link" />
     <axis xyz="0 0 0" />
   </joint>
 
@@ -390,7 +390,7 @@
   </link>
 
   <joint name="tcp_joint" type="fixed">
-    <parent link="gsmini_body_link"/>
+    <parent link="gelsight_mini_body_link"/>
     <child link="tcp_link"/>
     <origin rpy="0 0 0" xyz="0.0007 0.0 0.040"/>
   </joint>
