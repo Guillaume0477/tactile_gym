@@ -338,7 +338,7 @@
     <inertial>
       <origin
         xyz="0.00443338071044421 -0.0140914049333968 4.96453152977634E-09+0.035"
-        rpy="0 0 0" />
+        rpy="1.57 0 0" />
       <mass
         value="0.0077837104153161" />
       <inertia
@@ -351,8 +351,8 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 0.035"
-        rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
       <geometry>
         <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_body.STL" />
       </geometry>
@@ -364,8 +364,8 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0.035"
-        rpy="0 0 0" />
+        xyz="0 0 0"
+        rpy="1.57 0 0" />
       <geometry>
         <mesh filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_body.STL" />
       </geometry>
@@ -381,8 +381,8 @@
   <link name="gelsight_mini_tip_link">
     <inertial>
       <origin
-        xyz="-2.15568578500849E-07 0.00554133274527847 -0.00576051345741577-0.035"
-        rpy="0 0 0" />
+        xyz="-2.15568578500849E-07 0.00554133274527847 -0.035"
+        rpy="-1.57 0 0" />
       <mass
         value="0.00130411151086353" />
       <inertia
@@ -395,8 +395,8 @@
     </inertial>
     <visual>
       <origin
-        xyz="0 0 -0.035"
-        rpy="0 0 0" />
+        xyz="0 0 -0.002"
+        rpy="-1.57 0 0" />
       <geometry>
         <mesh
           filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb_hollow/meshes/gelsight_mini_core.STL" scale="1.0 1.0 1.0"/>
@@ -409,8 +409,8 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 -0.035"
-        rpy="0 0 0" />
+        xyz="0 0 -0.002"
+        rpy="-1.57 0 0" />
       <geometry>
         <mesh
           filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb/meshes/gelsight_mini_core.STL" />
@@ -446,7 +446,7 @@
   <joint name="tcp_joint" type="fixed">
     <parent link="gelsight_mini_body_link"/>
     <child link="tcp_link"/>
-    <origin rpy="0 0 0" xyz="0.0007 0.0 0.040"/>
+    <origin rpy="0 0 0" xyz="0.0007 0.0 0.0195"/>
   </joint>
 
 </robot>

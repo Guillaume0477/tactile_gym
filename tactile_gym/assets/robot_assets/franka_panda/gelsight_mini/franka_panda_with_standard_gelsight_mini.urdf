@@ -355,7 +355,7 @@
     </visual>
     <collision>
       <origin
-        xyz="0 0 0"
+        xyz="0 0 -0.002"
         rpy="-1.57 0 0" />
       <geometry>
         <mesh
@@ -392,7 +392,7 @@
   <joint name="tcp_joint" type="fixed">
     <parent link="gelsight_mini_body_link"/>
     <child link="tcp_link"/>
-    <origin rpy="0 0 0" xyz="0.0007 0.0 0.040"/>
+    <origin rpy="0 0 0" xyz="0.0007 0.0 0.0215"/>
   </joint>
 
 </robot>
