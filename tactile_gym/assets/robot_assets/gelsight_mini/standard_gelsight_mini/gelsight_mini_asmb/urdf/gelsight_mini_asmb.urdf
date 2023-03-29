@@ -91,9 +91,9 @@
       xyz="-0.00151521951809463 -1.36251105150219E-05 -0.00415"
       rpy="-3.14159265358979 0 1.5707963267949" />
     <parent
-      link="digit_body" />
+      link="gsmini_body" />
     <child
-      link="digit_core" />
+      link="gsmini_core" />
     <axis
       xyz="0 0 0" />
   </joint>
