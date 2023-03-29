@@ -32,7 +32,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         # used to setup control of robot
         self._sim_time_step = 1.0 / 240.0
         self._control_rate = 1.0 / 20.0
-        self._velocity_action_repeat = int(np.floor(self._control_rate / self._sim_time_step))
+        self._velocity_action_repeat = int(
+            np.floor(self._control_rate / self._sim_time_step))
         self._max_blocking_pos_move_steps = 10
 
         # pull params from env_modes specific to push env
@@ -66,6 +67,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
             self.embed_dist = 0.0015
         elif self.t_s_name == "digit":
             self.embed_dist = 0.0015
+        elif self.t_s_name == "gelsight_mini":
+            self.embed_dist = 0.0015
         # turn on goal visualisation
         self.visualise_goal = False
 
@@ -86,7 +89,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
             -45 * np.pi / 180,
             45 * np.pi / 180,
         )  # pitch lims
-        TCP_lims[5, 0], TCP_lims[5, 1] = -45 * np.pi / 180, 45 * np.pi / 180  # yaw lims
+        TCP_lims[5, 0], TCP_lims[5, 1] = -45 * \
+            np.pi / 180, 45 * np.pi / 180  # yaw lims
 
         # initial joint positions used when reset
         rest_poses = rest_poses_dict[self.arm_type][self.t_s_type]
@@ -178,7 +182,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         if self.object_mode == "pole":
             self.obj_base_width = 0.1
             self.obj_base_height = 0.0025
-            self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_balance/pole/pole.urdf")
+            self.object_path = add_assets_path(
+                "rl_env_assets/nonprehensile_manipulation/object_balance/pole/pole.urdf")
 
             # no buffer in this mode
             self.buffer_width = 0.0
@@ -215,7 +220,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         self.init_obj_pos = [
             self.workframe_pos[0],
             self.workframe_pos[1],
-            self.workframe_pos[2] + (self.buffer_height) + (self.obj_base_height / 2) - self.embed_dist,
+            self.workframe_pos[2] + (self.buffer_height) +
+            (self.obj_base_height / 2) - self.embed_dist,
         ]
         self.init_obj_rpy = np.array([0.0, 0.0, -np.pi / 2])
         self.init_obj_orn = self._pb.getQuaternionFromEuler(self.init_obj_rpy)
@@ -243,9 +249,11 @@ class ObjectBalanceEnv(BaseObjectEnv):
         scale = 7.5
 
         if self._show_gui:
-            plate_ball_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_balance/sphere/sphere_tex.urdf")
+            plate_ball_path = add_assets_path(
+                "rl_env_assets/nonprehensile_manipulation/object_balance/sphere/sphere_tex.urdf")
         else:
-            plate_ball_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_balance/sphere/sphere.urdf")
+            plate_ball_path = add_assets_path(
+                "rl_env_assets/nonprehensile_manipulation/object_balance/sphere/sphere.urdf")
 
         self.init_ball_pos = [
             self.workframe_pos[0],
@@ -253,7 +261,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
             self.workframe_pos[2] + sphere_rad * scale,
         ]
         self.init_ball_orn = [0, 0, 0, 1]
-        self.ball_id = self._pb.loadURDF(plate_ball_path, self.init_ball_pos, self.init_ball_orn, globalScaling=scale)
+        self.ball_id = self._pb.loadURDF(
+            plate_ball_path, self.init_ball_pos, self.init_ball_orn, globalScaling=scale)
 
         # make sure friction is high so ball rolls not slides
         self._pb.changeDynamics(self.ball_id, -1, lateralFriction=10.0)
@@ -289,7 +298,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         if self.object_mode in ["pole", "ball_on_plate"]:
             self._pb.changeConstraint(
                 self.obj_tip_constraint_id,
-                jointChildPivot=[0, 0, -self.obj_base_height / 2 + self.embed_dist],
+                jointChildPivot=[
+                    0, 0, -self.obj_base_height / 2 + self.embed_dist],
             )
 
     def reset_task(self):
@@ -311,19 +321,24 @@ class ObjectBalanceEnv(BaseObjectEnv):
                 self.embed_dist = self.np_random.uniform(0.001, 0.0025)
             elif self.t_s_name == "digit":
                 self.embed_dist = self.np_random.uniform(0.0015, 0.0025)
+            elif self.t_s_name == "gelsight_mini":
+                self.embed_dist = self.np_random.uniform(0.0015, 0.0025)
 
             self.init_obj_pos = [
                 self.workframe_pos[0],
                 self.workframe_pos[1],
-                self.workframe_pos[2] + self.obj_base_height / 2 - self.embed_dist,
+                self.workframe_pos[2] +
+                self.obj_base_height / 2 - self.embed_dist,
             ]
             self.update_constraints()
 
     def reset_plate_buffer(self):
-        self._pb.resetBasePositionAndOrientation(self.buffer_id, self.init_buffer_pos, self.init_buffer_orn)
+        self._pb.resetBasePositionAndOrientation(
+            self.buffer_id, self.init_buffer_pos, self.init_buffer_orn)
 
     def reset_ball(self):
-        self._pb.resetBasePositionAndOrientation(self.ball_id, self.init_ball_pos, self.init_ball_orn)
+        self._pb.resetBasePositionAndOrientation(
+            self.ball_id, self.init_ball_pos, self.init_ball_orn)
 
     def reset_object(self):
         """
@@ -332,7 +347,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         """
 
         # reset the position of the object
-        self._pb.resetBasePositionAndOrientation(self.obj_id, self.init_obj_pos, self.init_obj_orn)
+        self._pb.resetBasePositionAndOrientation(
+            self.obj_id, self.init_obj_pos, self.init_obj_orn)
 
         # make sure linear and angular damping is 0
         num_obj_joints = self._pb.getNumJoints(self.obj_id)
@@ -365,8 +381,10 @@ class ObjectBalanceEnv(BaseObjectEnv):
         # calculate force
         force_pos = self.init_obj_pos + np.array(
             [
-                self.np_random.choice([-1, 1]) * self.np_random.rand() * self.obj_base_width / 2,
-                self.np_random.choice([-1, 1]) * self.np_random.rand() * self.obj_base_width / 2,
+                self.np_random.choice(
+                    [-1, 1]) * self.np_random.rand() * self.obj_base_width / 2,
+                self.np_random.choice(
+                    [-1, 1]) * self.np_random.rand() * self.obj_base_width / 2,
                 0,
             ]
         )
@@ -375,7 +393,8 @@ class ObjectBalanceEnv(BaseObjectEnv):
         force = force_dir * force_mag
 
         # apply force
-        self._pb.applyExternalForce(self.obj_id, -1, force, force_pos, flags=self._pb.WORLD_FRAME)
+        self._pb.applyExternalForce(
+            self.obj_id, -1, force, force_pos, flags=self._pb.WORLD_FRAME)
 
         # plot force
         plot_vector(force_pos, force_dir)
@@ -388,17 +407,20 @@ class ObjectBalanceEnv(BaseObjectEnv):
         force = force_dir * force_mag
 
         # apply force
-        self._pb.applyExternalTorque(self.obj_id, -1, force, flags=self._pb.LINK_FRAME)
+        self._pb.applyExternalTorque(
+            self.obj_id, -1, force, flags=self._pb.LINK_FRAME)
 
     def apply_random_torque_ball(self, force_mag):
         """
         Apply a random torque to the ball object
         """
-        force_dir = np.array([self.np_random.uniform(-1, 1), self.np_random.uniform(-1, 1), 0])
+        force_dir = np.array(
+            [self.np_random.uniform(-1, 1), self.np_random.uniform(-1, 1), 0])
         force = force_dir * force_mag
 
         # apply force
-        self._pb.applyExternalTorque(self.ball_id, -1, force, flags=self._pb.LINK_FRAME)
+        self._pb.applyExternalTorque(
+            self.ball_id, -1, force, flags=self._pb.LINK_FRAME)
 
     def full_reset(self):
         """
@@ -474,11 +496,13 @@ class ObjectBalanceEnv(BaseObjectEnv):
         """
 
         cur_obj_pos, cur_obj_orn = self.get_obj_pos_worldframe()
-        cur_obj_rpy_deg = np.array(self._pb.getEulerFromQuaternion(cur_obj_orn)) * 180 / np.pi
+        cur_obj_rpy_deg = np.array(
+            self._pb.getEulerFromQuaternion(cur_obj_orn)) * 180 / np.pi
         init_obj_rpy_deg = self.init_obj_rpy * 180 / np.pi
 
         # calc distance in deg accounting for angle representation
-        rpy_dist = np.abs(((cur_obj_rpy_deg - init_obj_rpy_deg) + 180) % 360 - 180)
+        rpy_dist = np.abs(
+            ((cur_obj_rpy_deg - init_obj_rpy_deg) + 180) % 360 - 180)
 
         # terminate if either roll or pitch off by set distance
         if (rpy_dist[0] > self.termination_dist_deg) or (rpy_dist[1] > self.termination_dist_deg):

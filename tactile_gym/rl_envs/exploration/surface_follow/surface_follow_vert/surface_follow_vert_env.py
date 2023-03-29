@@ -34,10 +34,18 @@ class SurfaceFollowVertEnv(BaseSurfaceEnv):
 
         if self.t_s_name == "tactip":
             encoded_actions[1] = self.workframe_directions[1] * self.max_action
-        if self.t_s_name == "digitac":
-            encoded_actions[1] = self.workframe_directions[1] * self.max_action * 0.9
+
+        elif self.t_s_name == "digitac":
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.9
+
         elif self.t_s_name == "digit":
-            encoded_actions[1] = self.workframe_directions[1] * self.max_action * 0.7
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.7
+
+        elif self.t_s_name == "gelsight_mini":
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.7
 
         if self.movement_mode == "xRz":
             encoded_actions[0] = actions[0]
@@ -92,7 +100,8 @@ class SurfaceFollowVertEnv(BaseSurfaceEnv):
         ) = self.robot.arm.get_current_TCP_pos_vel_workframe()
 
         # convert the features into array that matches the image observation shape
-        feature_array = np.array([*tcp_pos_workframe, *self.goal_pos_workframe])
+        feature_array = np.array(
+            [*tcp_pos_workframe, *self.goal_pos_workframe])
 
         return feature_array
 

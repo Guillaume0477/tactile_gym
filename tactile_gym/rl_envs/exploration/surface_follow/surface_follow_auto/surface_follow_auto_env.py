@@ -22,7 +22,8 @@ class SurfaceFollowAutoEnv(BaseSurfaceEnv):
         show_tactile=False,
     ):
 
-        super(SurfaceFollowAutoEnv, self).__init__(max_steps, image_size, env_modes, show_gui, show_tactile)
+        super(SurfaceFollowAutoEnv, self).__init__(
+            max_steps, image_size, env_modes, show_gui, show_tactile)
 
     def encode_actions(self, actions):
         """
@@ -35,12 +36,24 @@ class SurfaceFollowAutoEnv(BaseSurfaceEnv):
         if self.t_s_name == "tactip":
             encoded_actions[0] = self.workframe_directions[0] * self.max_action
             encoded_actions[1] = self.workframe_directions[1] * self.max_action
+
         if self.t_s_name == "digitac":
-            encoded_actions[0] = self.workframe_directions[0] * self.max_action * 0.9
-            encoded_actions[1] = self.workframe_directions[1] * self.max_action * 0.9
+            encoded_actions[0] = self.workframe_directions[0] * \
+                self.max_action * 0.9
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.9
+
         elif self.t_s_name == "digit":
-            encoded_actions[0] = self.workframe_directions[0] * self.max_action * 0.7
-            encoded_actions[1] = self.workframe_directions[1] * self.max_action * 0.7
+            encoded_actions[0] = self.workframe_directions[0] * \
+                self.max_action * 0.7
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.7
+
+        elif self.t_s_name == "gelsight_mini":
+            encoded_actions[0] = self.workframe_directions[0] * \
+                self.max_action * 0.7
+            encoded_actions[1] = self.workframe_directions[1] * \
+                self.max_action * 0.7
 
         if self.movement_mode == "yz":
             encoded_actions[2] = actions[0]

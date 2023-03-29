@@ -35,7 +35,8 @@ class ObjectPushEnv(BaseObjectEnv):
         # used to setup control of robot
         self._sim_time_step = 1.0 / 240.0
         self._control_rate = 1.0 / 10.0
-        self._velocity_action_repeat = int(np.floor(self._control_rate / self._sim_time_step))
+        self._velocity_action_repeat = int(
+            np.floor(self._control_rate / self._sim_time_step))
         self._max_blocking_pos_move_steps = 10
 
         # pull params from env_modes specific to push env
@@ -59,11 +60,20 @@ class ObjectPushEnv(BaseObjectEnv):
         self.t_s_type = "right_angle"
         self.t_s_core = "fixed"
         if self.t_s_name == 'tactip':
-            self.t_s_dynamics = {"stiffness": 50, "damping": 100, "friction": 10.0}
+            self.t_s_dynamics = {"stiffness": 50,
+                                 "damping": 100, "friction": 10.0}
+
         elif self.t_s_name == 'digitac':
-            self.t_s_dynamics = {'stiffness': 300, 'damping': 100, 'friction': 10.0}
+            self.t_s_dynamics = {'stiffness': 300,
+                                 'damping': 100, 'friction': 10.0}
+
         elif self.t_s_name == 'digit':
-            self.t_s_dynamics = {'stiffness': 50, 'damping': 200, 'friction': 10.0}
+            self.t_s_dynamics = {'stiffness': 50,
+                                 'damping': 200, 'friction': 10.0}
+
+        elif self.t_s_name == 'gelsight_mini':
+            self.t_s_dynamics = {'stiffness': 50,
+                                 'damping': 200, 'friction': 10.0}
         # distance from goal to cause termination
         self.termination_pos_dist = 0.025
 
@@ -78,14 +88,17 @@ class ObjectPushEnv(BaseObjectEnv):
             TCP_lims[2, 0], TCP_lims[2, 1] = -0.0, 0.0  # z lims
             TCP_lims[3, 0], TCP_lims[3, 1] = -0.0, 0.0  # roll lims
             TCP_lims[4, 0], TCP_lims[4, 1] = -0.0, 0.0  # pitch lims
-            TCP_lims[5, 0], TCP_lims[5, 1] = -45 * np.pi / 180, 45 * np.pi / 180  # yaw lims
+            TCP_lims[5, 0], TCP_lims[5, 1] = -45 * \
+                np.pi / 180, 45 * np.pi / 180  # yaw lims
 
             if self.t_s_name == "tactip":
                 # this well_designed_pos is used for the object and the workframe.
-                self.well_designed_pos = np.array([0.30, -0.1, self.obj_height/2])
+                self.well_designed_pos = np.array(
+                    [0.30, -0.1, self.obj_height/2])
                 self.t_s_type = "mini_right_angle"
             else:
-                self.well_designed_pos = np.array([0.25, -0.1, self.obj_height/2])
+                self.well_designed_pos = np.array(
+                    [0.25, -0.1, self.obj_height/2])
         else:
             # limits
             TCP_lims = np.zeros(shape=(6, 2))
@@ -94,7 +107,8 @@ class ObjectPushEnv(BaseObjectEnv):
             TCP_lims[2, 0], TCP_lims[2, 1] = -0.0, 0.0  # z lims
             TCP_lims[3, 0], TCP_lims[3, 1] = -0.0, 0.0  # roll lims
             TCP_lims[4, 0], TCP_lims[4, 1] = -0.0, 0.0  # pitch lims
-            TCP_lims[5, 0], TCP_lims[5, 1] = -45 * np.pi / 180, 45 * np.pi / 180  # yaw lims
+            TCP_lims[5, 0], TCP_lims[5, 1] = -45 * \
+                np.pi / 180, 45 * np.pi / 180  # yaw lims
 
             # this well_designed_pos is used for the object and the workframe.
             self.well_designed_pos = np.array([0.55, -0.20, self.obj_height/2])
@@ -185,18 +199,22 @@ class ObjectPushEnv(BaseObjectEnv):
         # currently hardcode these for cube, could pull this from bounding box
 
         # define an initial position for the objects (world coords)
-        self.init_obj_pos = [self.well_designed_pos[0], self.well_designed_pos[1] + self.obj_width / 2, self.obj_height / 2]
+        self.init_obj_pos = [self.well_designed_pos[0],
+                             self.well_designed_pos[1] + self.obj_width / 2, self.obj_height / 2]
         # self.init_obj_pos = [self.well_designed_pos[0], self.well_designed_pos[1] + self.obj_width / 2 +0.06, self.obj_height / 2] # for doraemon
         # self.init_obj_orn = self._pb.getQuaternionFromEuler([-np.pi, 0.0, np.pi / 2])
-        self.init_obj_orn = self._pb.getQuaternionFromEuler([-np.pi, 0.0, np.pi / 2])
+        self.init_obj_orn = self._pb.getQuaternionFromEuler(
+            [-np.pi, 0.0, np.pi / 2])
 
         # get paths
-        self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_push/cube/cube.urdf")
+        self.object_path = add_assets_path(
+            "rl_env_assets/nonprehensile_manipulation/object_push/cube/cube.urdf")
         # self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_push/pink_tea_box/model.urdf")
         # self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_push/doraemon_bowl/model.urdf")
         # self.object_path = add_assets_path("rl_env_assets/nonprehensile_manipulation/object_push/doraemon_bowl/model.urdf")
 
-        self.goal_path = add_assets_path("shared_assets/environment_objects/goal_indicators/sphere_indicator.urdf")
+        self.goal_path = add_assets_path(
+            "shared_assets/environment_objects/goal_indicators/sphere_indicator.urdf")
 
     def reset_object(self):
         """
@@ -209,8 +227,10 @@ class ObjectPushEnv(BaseObjectEnv):
         else:
             self.init_obj_ang = 0.0
 
-        self.init_obj_orn = self._pb.getQuaternionFromEuler([-np.pi, 0.0, np.pi / 2 + self.init_obj_ang])
-        self._pb.resetBasePositionAndOrientation(self.obj_id, self.init_obj_pos, self.init_obj_orn)
+        self.init_obj_orn = self._pb.getQuaternionFromEuler(
+            [-np.pi, 0.0, np.pi / 2 + self.init_obj_ang])
+        self._pb.resetBasePositionAndOrientation(
+            self.obj_id, self.init_obj_pos, self.init_obj_orn)
 
         # perform object dynamics randomisations
         self._pb.changeDynamics(
@@ -245,7 +265,8 @@ class ObjectPushEnv(BaseObjectEnv):
                 [0, 0, 0, 1],
                 useFixedBase=True,
             )
-            self._pb.changeVisualShape(traj_point_id, -1, rgbaColor=[0, 1, 0, 0.5])
+            self._pb.changeVisualShape(
+                traj_point_id, -1, rgbaColor=[0, 1, 0, 0.5])
             self._pb.setCollisionFilterGroupMask(traj_point_id, -1, 0, 0)
             self.traj_ids.append(traj_point_id)
 
@@ -265,11 +286,13 @@ class ObjectPushEnv(BaseObjectEnv):
             sys.exit("Incorrect traj_type specified: {}".format(self.traj_type))
 
         # calc orientation to place object at
-        self.traj_rpy_workframe[:, 2] = np.gradient(self.traj_pos_workframe[:, 1], self.traj_spacing)
+        self.traj_rpy_workframe[:, 2] = np.gradient(
+            self.traj_pos_workframe[:, 1], self.traj_spacing)
 
         for i in range(int(self.traj_n_points)):
             # get workframe orn
-            self.traj_orn_workframe[i] = self._pb.getQuaternionFromEuler(self.traj_rpy_workframe[i])
+            self.traj_orn_workframe[i] = self._pb.getQuaternionFromEuler(
+                self.traj_rpy_workframe[i])
 
             # convert worldframe
             pos_worldframe, rpy_worldframe = self.robot.arm.workframe_to_worldframe(
@@ -278,8 +301,10 @@ class ObjectPushEnv(BaseObjectEnv):
             orn_worldframe = self._pb.getQuaternionFromEuler(rpy_worldframe)
 
             # place goal
-            self._pb.resetBasePositionAndOrientation(self.traj_ids[i], pos_worldframe, orn_worldframe)
-            self._pb.changeVisualShape(self.traj_ids[i], -1, rgbaColor=[0, 1, 0, 0.5])
+            self._pb.resetBasePositionAndOrientation(
+                self.traj_ids[i], pos_worldframe, orn_worldframe)
+            self._pb.changeVisualShape(
+                self.traj_ids[i], -1, rgbaColor=[0, 1, 0, 0.5])
 
     def update_trajectory_simplex(self):
         """
@@ -293,7 +318,8 @@ class ObjectPushEnv(BaseObjectEnv):
         first_run = True
         for i in range(int(self.traj_n_points)):
 
-            noise = simplex_noise.noise2(x=i * 0.1, y=1) * self.traj_max_perturb
+            noise = simplex_noise.noise2(
+                x=i * 0.1, y=1) * self.traj_max_perturb
 
             if first_run:
                 init_noise_pos_offset = -noise
@@ -349,7 +375,8 @@ class ObjectPushEnv(BaseObjectEnv):
                 self.goal_pos_worldframe,
                 self.goal_orn_worldframe,
             ) = self._pb.getBasePositionAndOrientation(self.goal_id)
-            self.goal_rpy_worldframe = self._pb.getEulerFromQuaternion(self.goal_orn_worldframe)
+            self.goal_rpy_worldframe = self._pb.getEulerFromQuaternion(
+                self.goal_orn_worldframe)
 
             # create variables for goal pose in workframe to use later
             self.goal_pos_workframe = self.traj_pos_workframe[self.targ_traj_list_id]
@@ -357,12 +384,15 @@ class ObjectPushEnv(BaseObjectEnv):
             self.goal_rpy_workframe = self.traj_rpy_workframe[self.targ_traj_list_id]
 
             # change colour of new target goal
-            self._pb.changeVisualShape(self.goal_id, -1, rgbaColor=[0, 0, 1, 0.5])
+            self._pb.changeVisualShape(
+                self.goal_id, -1, rgbaColor=[0, 0, 1, 0.5])
 
             # change colour of goal just reached
-            prev_goal_traj_list_id = self.targ_traj_list_id - 1 if self.targ_traj_list_id > 0 else None
+            prev_goal_traj_list_id = self.targ_traj_list_id - \
+                1 if self.targ_traj_list_id > 0 else None
             if prev_goal_traj_list_id is not None:
-                self._pb.changeVisualShape(self.traj_ids[prev_goal_traj_list_id], -1, rgbaColor=[1, 0, 0, 0.5])
+                self._pb.changeVisualShape(
+                    self.traj_ids[prev_goal_traj_list_id], -1, rgbaColor=[1, 0, 0, 0.5])
 
             return True
 
@@ -371,7 +401,8 @@ class ObjectPushEnv(BaseObjectEnv):
         encoded_actions = np.zeros(6)
 
         # get rotation matrix from current tip orientation
-        tip_rot_matrix = self._pb.getMatrixFromQuaternion(self.cur_tcp_orn_worldframe)
+        tip_rot_matrix = self._pb.getMatrixFromQuaternion(
+            self.cur_tcp_orn_worldframe)
         tip_rot_matrix = np.array(tip_rot_matrix).reshape(3, 3)
 
         # define initial vectors
@@ -383,8 +414,10 @@ class ObjectPushEnv(BaseObjectEnv):
         perp_tip_direction = tip_rot_matrix.dot(perp_vector)
 
         # transform into workframe frame for sending to robot
-        workframe_par_tip_direction = self.robot.arm.worldvec_to_workvec(par_tip_direction)
-        workframe_perp_tip_direction = self.robot.arm.worldvec_to_workvec(perp_tip_direction)
+        workframe_par_tip_direction = self.robot.arm.worldvec_to_workvec(
+            par_tip_direction)
+        workframe_perp_tip_direction = self.robot.arm.worldvec_to_workvec(
+            perp_tip_direction)
 
         if self.movement_mode == "TyRz":
 
@@ -486,22 +519,25 @@ class ObjectPushEnv(BaseObjectEnv):
         """
 
         # get normal vector of object
-        obj_rot_matrix = self._pb.getMatrixFromQuaternion(self.cur_obj_orn_worldframe)
+        obj_rot_matrix = self._pb.getMatrixFromQuaternion(
+            self.cur_obj_orn_worldframe)
         obj_rot_matrix = np.array(obj_rot_matrix).reshape(3, 3)
         obj_init_vector = np.array([1, 0, 0])
         obj_vector = obj_rot_matrix.dot(obj_init_vector)
 
         # get vector of t_s tip, directed through tip body
-        tip_rot_matrix = self._pb.getMatrixFromQuaternion(self.cur_tcp_orn_worldframe)
+        tip_rot_matrix = self._pb.getMatrixFromQuaternion(
+            self.cur_tcp_orn_worldframe)
         tip_rot_matrix = np.array(tip_rot_matrix).reshape(3, 3)
         tip_init_vector = np.array([1, 0, 0])
         tip_vector = tip_rot_matrix.dot(tip_init_vector)
 
         # get the cosine similarity/distance between the two vectors
-        cos_sim = np.dot(obj_vector, tip_vector) / (np.linalg.norm(obj_vector) * np.linalg.norm(tip_vector))
+        cos_sim = np.dot(obj_vector, tip_vector) / \
+            (np.linalg.norm(obj_vector) * np.linalg.norm(tip_vector))
         cos_dist = 1 - cos_sim
 
-        ## draw for debugging
+        # draw for debugging
         # line_scale = 0.2
         # start_point = self.cur_obj_pos_worldframe
         # normal = obj_vector * line_scale
@@ -563,7 +599,8 @@ class ObjectPushEnv(BaseObjectEnv):
 
         # sum rewards with multiplicative factors
         reward = -(
-            (W_obj_goal_pos * obj_goal_pos_dist) + (W_obj_goal_orn * obj_goal_orn_dist) + (W_tip_obj_orn * tip_obj_orn_dist)
+            (W_obj_goal_pos * obj_goal_pos_dist) + (W_obj_goal_orn *
+                                                    obj_goal_orn_dist) + (W_tip_obj_orn * tip_obj_orn_dist)
         )
 
         return reward
@@ -575,7 +612,8 @@ class ObjectPushEnv(BaseObjectEnv):
         """
         # get sim info on object
         cur_obj_pos_workframe, cur_obj_orn_workframe = self.get_obj_pos_workframe()
-        cur_obj_rpy_workframe = self._pb.getEulerFromQuaternion(cur_obj_orn_workframe)
+        cur_obj_rpy_workframe = self._pb.getEulerFromQuaternion(
+            cur_obj_orn_workframe)
         (
             cur_obj_lin_vel_workframe,
             cur_obj_ang_vel_workframe,

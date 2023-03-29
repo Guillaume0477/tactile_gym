@@ -40,29 +40,37 @@ class TactileSensor:
         self.connect_t_s()
 
         # if self.t_s_type in ["standard", "mini_standard", "flat", "right_angle"]:
-        if self.t_s_name in ["tactip", "digit", "digitac"]:
+        if self.t_s_name in ["tactip", "digit", "digitac", 'gelsight_mini']:
             self.turn_off_t_s_collisions()
 
     def turn_off_t_s_collisions(self):
         """
         Turn off collisions between t_s base and rest of the envs,
-        useful for speed of training due to mininmising collisions
+        useful for speed of training due to minimising collisions
         """
-        self._pb.setCollisionFilterGroupMask(self.robot_id, self.tactile_link_ids["body"], 0, 0)
+        self._pb.setCollisionFilterGroupMask(
+            self.robot_id, self.tactile_link_ids["body"], 0, 0)
         if self.t_s_name == 'tactip':
             if self.t_s_type in ["right_angle", "mini_right_angle", "forward"]:
-                self._pb.setCollisionFilterGroupMask(self.robot_id, self.tactile_link_ids["adapter"], 0, 0)
+                self._pb.setCollisionFilterGroupMask(
+                    self.robot_id, self.tactile_link_ids["adapter"], 0, 0)
 
         if self.t_s_core == "no_core":
-            self._pb.setCollisionFilterGroupMask(self.robot_id, self.tactile_link_ids["tip"], 0, 0)
+            self._pb.setCollisionFilterGroupMask(
+                self.robot_id, self.tactile_link_ids["tip"], 0, 0)
 
         # if self.t_s_name == "digit":
         #     self._pb.setCollisionFilterGroupMask(
         #         self.robot_id, self.tactip_link_ids['mask'], 0, 0)
 
+        # if self.t_s_name == "gelsight_mini":
+        #     self._pb.setCollisionFilterGroupMask(
+        #         self.robot_id, self.tactip_link_ids['mask'], 0, 0)
+
     def load_reference_images(self):
         # get saved reference images
-        border_images_path = add_assets_path(os.path.join("robot_assets", self.t_s_name, "reference_images"))
+        border_images_path = add_assets_path(os.path.join(
+            "robot_assets", self.t_s_name, "reference_images"))
 
         saved_file_dir = os.path.join(
             border_images_path,
@@ -92,15 +100,18 @@ class TactileSensor:
 
         # grab images for creating border from simulation
         no_deformation_rgb, no_deformation_dep, no_deformation_mask = self.get_imgs()
-        no_deformation_gray = cv2.cvtColor(no_deformation_rgb.astype(np.float32), cv2.COLOR_BGR2GRAY)
+        no_deformation_gray = cv2.cvtColor(
+            no_deformation_rgb.astype(np.float32), cv2.COLOR_BGR2GRAY)
 
         # convert mask from link/base ids to ones/zeros for border/not border
         mask_base_id = no_deformation_mask & ((1 << 24) - 1)
         mask_link_id = (no_deformation_mask >> 24) - 1
-        border_mask = (mask_base_id == self.robot_id) & (mask_link_id == self.tactile_link_ids["body"]).astype(np.uint8)
+        border_mask = (mask_base_id == self.robot_id) & (
+            mask_link_id == self.tactile_link_ids["body"]).astype(np.uint8)
 
         # create save file
-        border_images_path = add_assets_path(os.path.join("robot_assets", self.t_s_name, "reference_images"))
+        border_images_path = add_assets_path(os.path.join(
+            "robot_assets", self.t_s_name, "reference_images"))
 
         saved_file_dir = os.path.join(
             border_images_path,
@@ -141,11 +152,17 @@ class TactileSensor:
             if self.t_s_type in ["standard", "right_angle", "forward"]:
                 self.focal_dist = 0.0015
                 self.fov = 40
+        elif self.t_s_name == 'gelsight_mini':
+            if self.t_s_type in ["standard", "right_angle", "forward"]:
+                self.focal_dist = 0.0015
+                self.fov = 40
 
         self.pixel_width, self.pixel_height = self.image_size[0], self.image_size[1]
         self.aspect, self.nearplane, self.farplane = 1.0, 0.01, 1.0
-        self.focal_length = 1.0 / (2 * np.tan((self.fov * (np.pi / 180)) / 2))  # not used but useful to know
-        self.projection_matrix = self._pb.computeProjectionMatrixFOV(self.fov, self.aspect, self.nearplane, self.farplane)
+        # not used but useful to know
+        self.focal_length = 1.0 / (2 * np.tan((self.fov * (np.pi / 180)) / 2))
+        self.projection_matrix = self._pb.computeProjectionMatrixFOV(
+            self.fov, self.aspect, self.nearplane, self.farplane)
 
     def update_cam_frame(self):
 
@@ -173,7 +190,16 @@ class TactileSensor:
             elif self.t_s_type in ["right_angle", "forward"]:
                 cam_pos = (-0.00095, .0139, 0.005)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+
         elif self.t_s_name == 'digitac':
+            if self.t_s_type in ["standard"]:
+                cam_pos = (-0.00095, .0139, 0.020)
+                cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+            elif self.t_s_type in ["right_angle", "forward"]:
+                cam_pos = (-0.00095, .0139, 0.005)
+                cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+
+        elif self.t_s_name == 'gelsight_mini':
             if self.t_s_type in ["standard"]:
                 cam_pos = (-0.00095, .0139, 0.020)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
@@ -184,7 +210,8 @@ class TactileSensor:
         cam_orn = self._pb.getQuaternionFromEuler(cam_rpy)
 
         # get the camera frame relative to world frame
-        self.camframe_pos, self.camframe_orn = self._pb.multiplyTransforms(t_s_body_pos, t_s_body_orn, cam_pos, cam_orn)
+        self.camframe_pos, self.camframe_orn = self._pb.multiplyTransforms(
+            t_s_body_pos, t_s_body_orn, cam_pos, cam_orn)
 
     def camframe_to_worldframe(self, pos, rpy):
         """
@@ -194,7 +221,8 @@ class TactileSensor:
         rpy = np.array(rpy)
         orn = np.array(self._pb.getQuaternionFromEuler(rpy))
 
-        worldframe_pos, worldframe_orn = self._pb.multiplyTransforms(self.camframe_pos, self.camframe_orn, pos, orn)
+        worldframe_pos, worldframe_orn = self._pb.multiplyTransforms(
+            self.camframe_pos, self.camframe_orn, pos, orn)
         worldframe_rpy = self._pb.getEulerFromQuaternion(worldframe_orn)
 
         return np.array(worldframe_pos), np.array(worldframe_rpy)
@@ -204,7 +232,8 @@ class TactileSensor:
         Transforms a vector in work frame to a vector in world frame.
         """
         camframe_vec = np.array(camframe_vec)
-        rot_matrix = np.array(self._pb.getMatrixFromQuaternion(self.camframe_orn)).reshape(3, 3)
+        rot_matrix = np.array(self._pb.getMatrixFromQuaternion(
+            self.camframe_orn)).reshape(3, 3)
         worldframe_vec = rot_matrix.dot(camframe_vec)
 
         return np.array(worldframe_vec)
@@ -220,7 +249,8 @@ class TactileSensor:
         # calculate view matrix
         foward_vector = self.camvec_to_worldvec([1, 0, 0])
         up_vector = self.camvec_to_worldvec([0, 0, 1])
-        cam_target_pos = self.camframe_pos + self.focal_dist * np.array(foward_vector)
+        cam_target_pos = self.camframe_pos + \
+            self.focal_dist * np.array(foward_vector)
 
         view_matrix = self._pb.computeViewMatrix(
             self.camframe_pos,
@@ -279,17 +309,20 @@ class TactileSensor:
 
         # convert dep to display format
         max_penetration = 0.05
-        pen_img = ((np.clip(pen_img, 0, max_penetration) / max_penetration) * 255).astype(np.uint8)
+        pen_img = ((np.clip(pen_img, 0, max_penetration) /
+                   max_penetration) * 255).astype(np.uint8)
 
         # reduce noise by setting all parts of the image where the t_s body is visible to zero
         mask_base_id = cur_mask & ((1 << 24) - 1)
         mask_link_id = (cur_mask >> 24) - 1
-        full_mask = (mask_base_id == self.robot_id) & (mask_link_id == self.tactile_link_ids["body"])
+        full_mask = (mask_base_id == self.robot_id) & (
+            mask_link_id == self.tactile_link_ids["body"])
         pen_img[full_mask] = 0
 
         # add border from ref image
         if not self.turn_off_border:
-            pen_img[self.border_mask == 1] = self.no_deformation_gray[self.border_mask == 1]
+            pen_img[self.border_mask ==
+                    1] = self.no_deformation_gray[self.border_mask == 1]
 
         return pen_img
 
@@ -299,7 +332,8 @@ class TactileSensor:
         """
         # setup plot for rendering
         if self._show_tactile:
-            cv2.namedWindow("tactile_window_{}".format(self.t_s_num), cv2.WINDOW_NORMAL)
+            cv2.namedWindow("tactile_window_{}".format(
+                self.t_s_num), cv2.WINDOW_NORMAL)
             self._render_closed = False
         else:
             self._render_closed = True

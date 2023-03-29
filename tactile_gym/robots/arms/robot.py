@@ -74,8 +74,8 @@ class Robot:
                 tactile_link_ids['adapter'] = self.arm.link_name_to_index[
                     "tactip_adapter_link"
                 ]
-            elif self.t_s_name in ['digitac', 'digit']:
-                print("TODO: Add the adpater link after get it into the URDF")
+            elif self.t_s_name in ['digitac', 'digit', 'gelsight_mini']:
+                print("TODO: Add the adapter link after get it into the URDF")
 
         # connect the sensor the tactip
         self.t_s = TactileSensor(
@@ -238,8 +238,10 @@ class Robot:
                     self._pb.POSITION_CONTROL,
                     targetPositions=step_j,
                     targetVelocities=[0.0] * self.arm.num_control_dofs,
-                    positionGains=[self.arm.pos_gain] * self.arm.num_control_dofs,
-                    velocityGains=[self.arm.vel_gain] * self.arm.num_control_dofs
+                    positionGains=[self.arm.pos_gain] *
+                    self.arm.num_control_dofs,
+                    velocityGains=[self.arm.vel_gain] *
+                    self.arm.num_control_dofs
                 )
 
             # step the simulation

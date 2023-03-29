@@ -93,6 +93,8 @@ class EdgeFollowEnv(BaseTactileEnv):
             self.embed_dist = 0.0035
         elif self.t_s_name == 'digitac':
             self.embed_dist = 0.0035
+        elif self.t_s_name == 'gelsight_mini':
+            self.embed_dist = 0.0035
 
         # setup variables
         self.setup_edge()
@@ -103,7 +105,8 @@ class EdgeFollowEnv(BaseTactileEnv):
         self.load_edge()
 
         # work frame origin
-        self.workframe_pos = np.array([self.well_designed_pos[0], self.well_designed_pos[1], self.edge_height])
+        self.workframe_pos = np.array(
+            [self.well_designed_pos[0], self.well_designed_pos[1], self.edge_height])
         self.workframe_rpy = np.array([-np.pi, 0.0, np.pi / 2])
 
         # initial joint positions used when reset
@@ -228,7 +231,8 @@ class EdgeFollowEnv(BaseTactileEnv):
             useFixedBase=True,
         )
         self.goal_indicator = self._pb.loadURDF(
-            add_assets_path("shared_assets/environment_objects/goal_indicators/sphere_indicator.urdf"),
+            add_assets_path(
+                "shared_assets/environment_objects/goal_indicators/sphere_indicator.urdf"),
             self.edge_pos,
             [0, 0, 0, 1],
             useFixedBase=True,
@@ -238,7 +242,8 @@ class EdgeFollowEnv(BaseTactileEnv):
 
         # load in the edge stimulus
         self.edge_ang = self.np_random.uniform(-np.pi, np.pi)
-        self.edge_orn = self._pb.getQuaternionFromEuler([0.0, 0.0, self.edge_ang])
+        self.edge_orn = self._pb.getQuaternionFromEuler(
+            [0.0, 0.0, self.edge_ang])
         self._pb.resetBasePositionAndOrientation(
             self.edge_stim_id, self.edge_pos, self.edge_orn
         )
@@ -295,6 +300,8 @@ class EdgeFollowEnv(BaseTactileEnv):
                 self.embed_dist = self.np_random.uniform(0.0011, 0.0028)
             elif self.t_s_name == 'digitac':
                 self.embed_dist = self.np_random.uniform(0.0015, 0.0045)
+            elif self.t_s_name == 'gelsight_mini':
+                self.embed_dist = self.np_random.uniform(0.0011, 0.0028)
         # load an edge with random orientation and goal
         self.update_edge()
 
@@ -324,7 +331,8 @@ class EdgeFollowEnv(BaseTactileEnv):
         # update the workframe to a new position if embed dist randomisations are on
         self.reset_task()
         init_TCP_pos, init_TCP_rpy = self.update_init_pose()
-        self.robot.reset(reset_TCP_pos=init_TCP_pos, reset_TCP_rpy=init_TCP_rpy)
+        self.robot.reset(reset_TCP_pos=init_TCP_pos,
+                         reset_TCP_rpy=init_TCP_rpy)
 
         # just to change variables to the reset pose incase needed before taking
         # a step
@@ -399,7 +407,8 @@ class EdgeFollowEnv(BaseTactileEnv):
 
     def xyz_dist_to_goal(self):
         dist = np.linalg.norm(
-            np.array(self.cur_tcp_pos_worldframe) - np.array(self.goal_pos_worldframe)
+            np.array(self.cur_tcp_pos_worldframe) -
+            np.array(self.goal_pos_worldframe)
         )
         return dist
 
@@ -447,7 +456,8 @@ class EdgeFollowEnv(BaseTactileEnv):
         yaw_dist = 0
 
         # sum rewards with multiplicative factors
-        reward = -((W_goal * goal_dist) + (W_edge * edge_dist) + (W_yaw * yaw_dist))
+        reward = -((W_goal * goal_dist) +
+                   (W_edge * edge_dist) + (W_yaw * yaw_dist))
 
         return reward
 
