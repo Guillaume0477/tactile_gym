@@ -9,7 +9,7 @@ def main():
     max_steps = 10000
     show_gui = True
     show_tactile = False
-    render = False
+    render = True
     print_info = True
     image_size = [256, 256]
     env_modes = {
@@ -17,8 +17,8 @@ def main():
         "movement_mode": "xyzRxRyRz",
 
         # specify arm
-        "arm_type": "ur5",
-        # "arm_type": "franka_panda",
+        # "arm_type": "ur5",
+        "arm_type": "franka_panda",
         # "arm_type": "kuka_iiwa",
         # "arm_type": "mg400",
 
@@ -26,10 +26,11 @@ def main():
         "tactile_sensor_name": "tactip",
         # "tactile_sensor_name": "digit",
         # "tactile_sensor_name": "digitac",
+        # "tactile_sensor_name": "gelsight_mini",
 
         # the type of control used
-        # 'control_mode':'TCP_position_control',
-        "control_mode": "TCP_velocity_control",
+        'control_mode': 'TCP_position_control',
+        # "control_mode": "TCP_velocity_control",
 
         # which observation type to return
         "observation_mode": "oracle",
@@ -81,7 +82,8 @@ def main():
         )
 
     # run the control loop
-    demo_rl_env(env, num_iter, action_ids, show_gui, show_tactile, render, print_info)
+    demo_rl_env(env, num_iter, action_ids, show_gui,
+                show_tactile, render, print_info)
 
 
 if __name__ == "__main__":

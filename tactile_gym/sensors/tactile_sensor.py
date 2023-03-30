@@ -155,7 +155,7 @@ class TactileSensor:
         elif self.t_s_name == 'gelsight_mini':
             if self.t_s_type in ["standard", "right_angle", "forward"]:
                 self.focal_dist = 0.0015
-                self.fov = 40
+                self.fov = 50
 
         self.pixel_width, self.pixel_height = self.image_size[0], self.image_size[1]
         self.aspect, self.nearplane, self.farplane = 1.0, 0.01, 1.0
@@ -185,7 +185,7 @@ class TactileSensor:
 
         elif self.t_s_name == 'digit':
             if self.t_s_type in ["standard"]:
-                cam_pos = (-0.00095, .0139, 0.020)
+                cam_pos = (-0.00095, .0139, -0.020)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
             elif self.t_s_type in ["right_angle", "forward"]:
                 cam_pos = (-0.00095, .0139, 0.005)
@@ -193,18 +193,25 @@ class TactileSensor:
 
         elif self.t_s_name == 'digitac':
             if self.t_s_type in ["standard"]:
-                cam_pos = (-0.00095, .0139, 0.020)
+                cam_pos = (-0.00095, 0.0139, 0.020)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+                # cam_pos = (0, 0, 0.03)
+                # cam_rpy = (0, -np.pi / 2, np.pi)
             elif self.t_s_type in ["right_angle", "forward"]:
-                cam_pos = (-0.00095, .0139, 0.005)
+                cam_pos = (-0.00095, 0.0139, 0.005)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+                # cam_pos = (0, 0, 0.03)
+                # cam_rpy = (0, -np.pi / 2, np.pi)
 
         elif self.t_s_name == 'gelsight_mini':
             if self.t_s_type in ["standard"]:
-                cam_pos = (-0.00095, .0139, 0.020)
-                cam_rpy = (np.pi, -np.pi/2, np.pi/2)
+                # cam_pos = (-0.00095, 0.0139, -0.02)
+                cam_pos = (-0.0035, -0.005, -0.014)
+                cam_rpy = (np.pi, 0, np.pi/2)
+                # cam_pos = (0, 0, 0)  # -0.005
+                # cam_rpy = (np.pi, 0, np.pi/2)
             elif self.t_s_type in ["right_angle", "forward"]:
-                cam_pos = (-0.00095, .0139, 0.005)
+                cam_pos = (-0.00095, 0, 0.005)
                 cam_rpy = (np.pi, -np.pi/2, np.pi/2)
 
         cam_orn = self._pb.getQuaternionFromEuler(cam_rpy)

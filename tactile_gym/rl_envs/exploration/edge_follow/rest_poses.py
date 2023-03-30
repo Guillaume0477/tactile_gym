@@ -54,27 +54,42 @@ rest_poses_dict = {
                 ]
             ),
         },
-
-        "franka_panda": {
+        "gelsight_mini": {
             "standard": np.array(
                 [
                     0.00,  # world_joint         (fixed)
-                    3.21456,  # panda_joint1     (revolute)
-                    1.30233,  # panda_joint2     (revolute)
-                    2.99673,  # panda_joint3     (revolute)
-                    0.83832,  # panda_joint4     (revolute)
-                    -2.97647,  # panda_joint5    (revolute)
-                    2.13176,  # panda_joint6     (revolute)
-                    4.65986,  # panda_joint7     (revolute)
+                    0.1666452116249431,  # base_joint       (revolute)
+                    -2.2334888481855204,  # shoulder_joint  (revolute)
+                    -1.6642245054428424,  # elbow_joint     (revolute)
+                    -0.8142762445463524,  # wrist_1_joint   (revolute)
+                    1.573151527964482,  # wrist_2_joint    (revolute)
+                    1.7398309441833082,  # wrist_3_joint    (revolute)
                     0.00,  # ee_joint            (fixed)
                     0.00,  # tactip_ee_joint     (fixed)
                     0.00,  # tactip_tip_to_body (fixed)
                     0.00   # tcp_joint           (fixed)
                 ]
-            )
-        }
+            ),
+        },
     },
     "kuka_iiwa": {
+        "gelsight_mini": {
+            "standard": np.array(
+                [
+                    0.00,  # world_joint         (fixed)
+                    0.1666452116249431,  # base_joint       (revolute)
+                    -2.2334888481855204,  # shoulder_joint  (revolute)
+                    -1.6642245054428424,  # elbow_joint     (revolute)
+                    -0.8142762445463524,  # wrist_1_joint   (revolute)
+                    1.573151527964482,  # wrist_2_joint    (revolute)
+                    1.7398309441833082,  # wrist_3_joint    (revolute)
+                    0.00,  # ee_joint            (fixed)
+                    0.00,  # tactip_ee_joint     (fixed)
+                    0.00,  # tactip_tip_to_body (fixed)
+                    0.00   # tcp_joint           (fixed)
+                ]
+            ),
+        },
         "standard": np.array(
             [
                 0.00,  # world_joint          (fixed)
@@ -89,6 +104,41 @@ rest_poses_dict = {
                 0.00,  # tactip_ee_joint      (fixed)
                 0.00,  # tactip_tip_to_body  (fixed)
                 0.00   # tcp_joint            (fixed)
+            ]
+        )
+    },
+    "franka_panda": {
+        "gelsight_mini": {
+            "standard": np.array(
+                [
+                    0.00,  # world_joint         (fixed)
+                    0.1666452116249431,  # base_joint       (revolute)
+                    -2.2334888481855204,  # shoulder_joint  (revolute)
+                    -1.6642245054428424,  # elbow_joint     (revolute)
+                    -0.8142762445463524,  # wrist_1_joint   (revolute)
+                    1.573151527964482,  # wrist_2_joint    (revolute)
+                    1.7398309441833082,  # wrist_3_joint    (revolute)
+                    0.00,  # ee_joint            (fixed)
+                    0.00,  # tactip_ee_joint     (fixed)
+                    0.00,  # tactip_tip_to_body (fixed)
+                    0.00   # tcp_joint           (fixed)
+                ]
+            ),
+        },
+        "standard": np.array(
+            [
+                0.00,  # world_joint         (fixed)
+                3.21456,  # panda_joint1     (revolute)
+                1.30233,  # panda_joint2     (revolute)
+                2.99673,  # panda_joint3     (revolute)
+                0.83832,  # panda_joint4     (revolute)
+                -2.97647,  # panda_joint5    (revolute)
+                2.13176,  # panda_joint6     (revolute)
+                4.65986,  # panda_joint7     (revolute)
+                0.00,  # ee_joint            (fixed)
+                0.00,  # tactip_ee_joint     (fixed)
+                0.00,  # tactip_tip_to_body (fixed)
+                0.00   # tcp_joint           (fixed)
             ]
         )
     },

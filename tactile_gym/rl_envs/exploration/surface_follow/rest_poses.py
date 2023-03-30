@@ -4,106 +4,140 @@ rest_poses_dict = {
     "ur5": {
         "tactip":
             {
-            "standard": np.array(
-                [
-                    0.00,  # world_joint         (fixed)
-                    0.16682,  # base_joint       (revolute)
-                    -2.18943,  # shoulder_joint  (revolute)
-                    -1.65357,  # elbow_joint     (revolute)
-                    -0.86897,  # wrist_1_joint   (revolute)
-                    1.57315,  # wrist_2_joint    (revolute)
-                    1.74001,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint            (fixed)
-                    0.00,  # tactip_ee_joint     (fixed)
-                    0.00,  # tactip_tip_to_body (fixed)
-                    0.00,  # tcp_joint           (fixed)
-                ]
-            ),
-            "forward": np.array(
-                [
-                    0.00,  # world_joint            (fixed)
-                    0.20199342416011004,  # base_joint       (revolute)
-                    -1.8581332389746197,  # shoulder_joint  (revolute)
-                    -1.8168154715398577,  # elbow_joint     (revolute)
-                    -1.0385402849835499,  # wrist_1_joint   (revolute)
-                    1.569399439236753,  # wrist_2_joint    (revolute)
-                    -1.3656188934713112,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint               (fixed)
-                    0.00,  # tactip_ee_joint        (fixed)
-                    0.00,  # tactip_body_to_adapter (fixed)
-                    0.00,  # tactip_tip_to_body    (fixed)
-                    0.00   # tcp_joint              (fixed)
-                ]
-            ),
+                "standard": np.array(
+                    [
+                        0.00,  # world_joint         (fixed)
+                        0.16682,  # base_joint       (revolute)
+                        -2.18943,  # shoulder_joint  (revolute)
+                        -1.65357,  # elbow_joint     (revolute)
+                        -0.86897,  # wrist_1_joint   (revolute)
+                        1.57315,  # wrist_2_joint    (revolute)
+                        1.74001,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint            (fixed)
+                        0.00,  # tactip_ee_joint     (fixed)
+                        0.00,  # tactip_tip_to_body (fixed)
+                        0.00,  # tcp_joint           (fixed)
+                    ]
+                ),
+                "forward": np.array(
+                    [
+                        0.00,  # world_joint            (fixed)
+                        0.20199342416011004,  # base_joint       (revolute)
+                        -1.8581332389746197,  # shoulder_joint  (revolute)
+                        -1.8168154715398577,  # elbow_joint     (revolute)
+                        -1.0385402849835499,  # wrist_1_joint   (revolute)
+                        1.569399439236753,  # wrist_2_joint    (revolute)
+                        -1.3656188934713112,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint               (fixed)
+                        0.00,  # tactip_ee_joint        (fixed)
+                        0.00,  # tactip_body_to_adapter (fixed)
+                        0.00,  # tactip_tip_to_body    (fixed)
+                        0.00   # tcp_joint              (fixed)
+                    ]
+                ),
 
             },
         "digitac":
             {
-            "standard": np.array(
-                [
-                    0.00,  # world_joint         (fixed)
-                    0.16682,  # base_joint       (revolute)
-                    -2.18943,  # shoulder_joint  (revolute)
-                    -1.65357,  # elbow_joint     (revolute)
-                    -0.86897,  # wrist_1_joint   (revolute)
-                    1.57315,  # wrist_2_joint    (revolute)
-                    1.74001,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint            (fixed)
-                    0.00,  # tactip_ee_joint     (fixed)
-                    0.00,  # tactip_tip_to_body (fixed)
-                    0.00,  # tcp_joint           (fixed)
-                ]
-            ),
-            "forward": np.array(
-                [
-                    0.00,  # world_joint            (fixed)
-                    0.19148011767408704,  # base_joint       (revolute)
-                    -1.92776038604851,  # shoulder_joint  (revolute)
-                    -1.7217555613365743,  # elbow_joint     (revolute)
-                    -1.0625670745823885,  # wrist_1_joint   (revolute)
-                    1.568310282843754,  # wrist_2_joint    (revolute)
-                    -1.3737671809549512,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint               (fixed)
-                    0.00,  # tactip_ee_joint        (fixed)
-                    0.00,  # tactip_body_to_adapter (fixed)
-                    0.00,  # tactip_tip_to_body    (fixed)
-                    0.00   # tcp_joint              (fixed)
-                ]
-            ),
+                "standard": np.array(
+                    [
+                        0.00,  # world_joint         (fixed)
+                        0.16682,  # base_joint       (revolute)
+                        -2.18943,  # shoulder_joint  (revolute)
+                        -1.65357,  # elbow_joint     (revolute)
+                        -0.86897,  # wrist_1_joint   (revolute)
+                        1.57315,  # wrist_2_joint    (revolute)
+                        1.74001,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint            (fixed)
+                        0.00,  # tactip_ee_joint     (fixed)
+                        0.00,  # tactip_tip_to_body (fixed)
+                        0.00,  # tcp_joint           (fixed)
+                    ]
+                ),
+                "forward": np.array(
+                    [
+                        0.00,  # world_joint            (fixed)
+                        0.19148011767408704,  # base_joint       (revolute)
+                        -1.92776038604851,  # shoulder_joint  (revolute)
+                        -1.7217555613365743,  # elbow_joint     (revolute)
+                        -1.0625670745823885,  # wrist_1_joint   (revolute)
+                        1.568310282843754,  # wrist_2_joint    (revolute)
+                        -1.3737671809549512,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint               (fixed)
+                        0.00,  # tactip_ee_joint        (fixed)
+                        0.00,  # tactip_body_to_adapter (fixed)
+                        0.00,  # tactip_tip_to_body    (fixed)
+                        0.00   # tcp_joint              (fixed)
+                    ]
+                ),
             },
         "digit":
             {
-            "standard": np.array(
-                [
-                    0.00,  # world_joint         (fixed)
-                    0.16682,  # base_joint       (revolute)
-                    -2.18943,  # shoulder_joint  (revolute)
-                    -1.65357,  # elbow_joint     (revolute)
-                    -0.86897,  # wrist_1_joint   (revolute)
-                    1.57315,  # wrist_2_joint    (revolute)
-                    1.74001,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint            (fixed)
-                    0.00,  # tactip_ee_joint     (fixed)
-                    0.00,  # tactip_tip_to_body (fixed)
-                    0.00,  # tcp_joint           (fixed)
-                ]
-            ),
-            "forward": np.array(
-                [
-                    0.00,  # world_joint            (fixed)
-                    0.19148011767408704,  # base_joint       (revolute)
-                    -1.92776038604851,  # shoulder_joint  (revolute)
-                    -1.7217555613365743,  # elbow_joint     (revolute)
-                    -1.0625670745823885,  # wrist_1_joint   (revolute)
-                    1.568310282843754,  # wrist_2_joint    (revolute)
-                    -1.3737671809549512,  # wrist_3_joint    (revolute)
-                    0.00,  # ee_joint               (fixed)
-                    0.00,  # tactip_ee_joint        (fixed)
-                    0.00,  # tactip_body_to_adapter (fixed)
-                    0.00,  # tactip_tip_to_body    (fixed)
-                    0.00   # tcp_joint              (fixed)
-                ]
-            ),
+                "standard": np.array(
+                    [
+                        0.00,  # world_joint         (fixed)
+                        0.16682,  # base_joint       (revolute)
+                        -2.18943,  # shoulder_joint  (revolute)
+                        -1.65357,  # elbow_joint     (revolute)
+                        -0.86897,  # wrist_1_joint   (revolute)
+                        1.57315,  # wrist_2_joint    (revolute)
+                        1.74001,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint            (fixed)
+                        0.00,  # tactip_ee_joint     (fixed)
+                        0.00,  # tactip_tip_to_body (fixed)
+                        0.00,  # tcp_joint           (fixed)
+                    ]
+                ),
+                "forward": np.array(
+                    [
+                        0.00,  # world_joint            (fixed)
+                        0.19148011767408704,  # base_joint       (revolute)
+                        -1.92776038604851,  # shoulder_joint  (revolute)
+                        -1.7217555613365743,  # elbow_joint     (revolute)
+                        -1.0625670745823885,  # wrist_1_joint   (revolute)
+                        1.568310282843754,  # wrist_2_joint    (revolute)
+                        -1.3737671809549512,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint               (fixed)
+                        0.00,  # tactip_ee_joint        (fixed)
+                        0.00,  # tactip_body_to_adapter (fixed)
+                        0.00,  # tactip_tip_to_body    (fixed)
+                        0.00   # tcp_joint              (fixed)
+                    ]
+                ),
+            },
+            "gelsight_mini":
+            {
+                "standard": np.array(
+                    [
+                        0.00,  # world_joint         (fixed)
+                        0.16682,  # base_joint       (revolute)
+                        -2.18943,  # shoulder_joint  (revolute)
+                        -1.65357,  # elbow_joint     (revolute)
+                        -0.86897,  # wrist_1_joint   (revolute)
+                        1.57315,  # wrist_2_joint    (revolute)
+                        1.74001,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint            (fixed)
+                        0.00,  # tactip_ee_joint     (fixed)
+                        0.00,  # tactip_tip_to_body (fixed)
+                        0.00,  # tcp_joint           (fixed)
+                    ]
+                ),
+                "forward": np.array(
+                    [
+                        0.00,  # world_joint            (fixed)
+                        0.19148011767408704,  # base_joint       (revolute)
+                        -1.92776038604851,  # shoulder_joint  (revolute)
+                        -1.7217555613365743,  # elbow_joint     (revolute)
+                        -1.0625670745823885,  # wrist_1_joint   (revolute)
+                        1.568310282843754,  # wrist_2_joint    (revolute)
+                        -1.3737671809549512,  # wrist_3_joint    (revolute)
+                        0.00,  # ee_joint               (fixed)
+                        0.00,  # tactip_ee_joint        (fixed)
+                        0.00,  # tactip_body_to_adapter (fixed)
+                        0.00,  # tactip_tip_to_body    (fixed)
+                        0.00   # tcp_joint              (fixed)
+                    ]
+                ),
 
             },
     },
@@ -147,7 +181,7 @@ rest_poses_dict = {
         )
     },
     "mg400": {
-        "tactip":{
+        "tactip": {
             "forward": np.array(
                 [
                     0,                      # j1        (fixed)
@@ -161,12 +195,13 @@ rest_poses_dict = {
                     0,                      # tactip_tip_to_body    (fixed)
                     0,                      # tcp_joint (fixed)
                     0.2767807985667566,      # j2_2 = j2_1         (revolute)
-                    -0.276782284688448 ,   # j3_2 = -j2_1         (revolute)
-                    0.9049031579057567      # j4_2 = j2_1 + j3_1          (revolute)
+                    -0.276782284688448,   # j3_2 = -j2_1         (revolute)
+                    # j4_2 = j2_1 + j3_1          (revolute)
+                    0.9049031579057567
                 ]
             ),
         },
-        "digit":{
+        "digit": {
             "forward": np.array(
                 [
                     0,                      # j1        (fixed)
@@ -179,12 +214,13 @@ rest_poses_dict = {
                     0,                      # tactip_tip_to_body    (fixed)
                     0,                      # tcp_joint (fixed)
                     0.5905665736774282,      # j2_2 = j2_1         (revolute)
-                    -0.5905665736774282 ,   # j3_2 = -j2_1         (revolute)
-                    0.904800272812408      # j4_2 = j2_1 + j3_1          (revolute)
+                    -0.5905665736774282,   # j3_2 = -j2_1         (revolute)
+                    # j4_2 = j2_1 + j3_1          (revolute)
+                    0.904800272812408
                 ]
             ),
         },
-        "digitac":{
+        "digitac": {
             "forward": np.array(
                 [
                     0,                      # j1        (fixed)
@@ -197,11 +233,12 @@ rest_poses_dict = {
                     0,                      # tactip_tip_to_body    (fixed)
                     0,                      # tcp_joint (fixed)
                     0.5212821789748887,      # j2_2 = j2_1         (revolute)
-                    -0.5212821789748887 ,   # j3_2 = -j2_1         (revolute)
-                    0.9632925252126955      # j4_2 = j2_1 + j3_1          (revolute)
+                    -0.5212821789748887,   # j3_2 = -j2_1         (revolute)
+                    # j4_2 = j2_1 + j3_1          (revolute)
+                    0.9632925252126955
                 ]
-                    ),
+            ),
         },
-        
+
     }
 }

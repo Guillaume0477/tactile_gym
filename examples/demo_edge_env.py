@@ -17,12 +17,13 @@ def main():
         "movement_mode": "xy",
 
         # specify arm
-        "arm_type": "ur5",
+        "arm_type": "franka_panda",
 
         # specify tactile sensor
-        "tactile_sensor_name": "tactip",
+        # "tactile_sensor_name": "tactip",
         # "tactile_sensor_name": "digit",
         # "tactile_sensor_name": "digitac",
+        "tactile_sensor_name": "gelsight_mini",
 
         # the type of control used
         # "control_mode": "TCP_position_control",
@@ -63,27 +64,40 @@ def main():
     if show_gui:
 
         if env_modes["movement_mode"] == "xy":
-            action_ids.append(env._pb.addUserDebugParameter("dX", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dY", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dX", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dY", min_action, max_action, 0))
 
         elif env_modes["movement_mode"] == "xyz":
-            action_ids.append(env._pb.addUserDebugParameter("dX", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dY", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dZ", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dX", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dY", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dZ", min_action, max_action, 0))
 
         elif env_modes["movement_mode"] == "xyRz":
-            action_ids.append(env._pb.addUserDebugParameter("dX", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dY", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dRz", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dX", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dY", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dRz", min_action, max_action, 0))
 
         elif env_modes["movement_mode"] == "xyzRz":
-            action_ids.append(env._pb.addUserDebugParameter("dX", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dY", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dZ", min_action, max_action, 0))
-            action_ids.append(env._pb.addUserDebugParameter("dRz", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dX", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dY", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dZ", min_action, max_action, 0))
+            action_ids.append(env._pb.addUserDebugParameter(
+                "dRz", min_action, max_action, 0))
 
     # run the control loop
-    demo_rl_env(env, num_iter, action_ids, show_gui, show_tactile, render, print_info)
+    demo_rl_env(env, num_iter, action_ids, show_gui,
+                show_tactile, render, print_info)
 
 
 if __name__ == "__main__":
