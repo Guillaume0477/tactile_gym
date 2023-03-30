@@ -305,7 +305,7 @@
       <material
         name="gelsight_mini_body">
         <color
-          rgba="0.0 0.0 0.0 1" />
+          rgba="1.0 0.0 0.0 1" />
       </material>
     </visual>
     <collision>
@@ -345,12 +345,12 @@
         rpy="-1.57 0 0" />
       <geometry>
         <mesh
-          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb_hollow/meshes/gelsight_mini_core.STL" scale="1.0 1.0 1.0"/>
+          filename="../gelsight_mini/standard_gelsight_mini/gelsight_mini_asmb_hollow/meshes/gelsight_mini_core.STL"/>
       </geometry>
       <material
         name="gelsight_mini_skin">
         <color
-          rgba="1.0 1.0 1.0 1" />
+          rgba="0.0 0.0 1.0 1" />
       </material>
     </visual>
     <collision>
