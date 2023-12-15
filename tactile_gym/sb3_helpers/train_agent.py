@@ -8,7 +8,7 @@ import stable_baselines3 as sb3
 from stable_baselines3.common.callbacks import EvalCallback, EveryNTimesteps, CheckpointCallback
 
 from stable_baselines3 import PPO, SAC
-from sb3_contrib import RAD_SAC, RAD_PPO
+#from sb3_contrib import RAD_SAC, RAD_PPO
 
 import tactile_gym.rl_envs
 from tactile_gym.sb3_helpers.params import import_parameters
@@ -289,17 +289,17 @@ if __name__ == "__main__":
         )
     else:
         # choose which RL algo to use
-        # algo_name = 'ppo'
-        algo_name = "rad_ppo"
+        algo_name = 'ppo'
+        # algo_name = "rad_ppo"
         # algo_name = 'sac'
         # algo_name = 'rad_sac'
     #
-        env_name = "edge_follow-v0"
+        # env_name = "edge_follow-v0"
         # env_name = 'surface_follow-v2'
         # env_name = 'surface_follow-v1'
         # env_name = 'surface_follow-v0'
         # env_name = 'object_roll-v0'
-        # env_name = "object_push-v0"
+        env_name = "object_push-v0"
         # env_name = 'object_balance-v0'
 
         # import paramters
