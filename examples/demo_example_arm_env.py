@@ -23,10 +23,10 @@ def main():
         # "arm_type": "mg400",
 
         # specify tactile sensor
-        "tactile_sensor_name": "tactip",
+        # "tactile_sensor_name": "tactip",
         # "tactile_sensor_name": "digit",
         # "tactile_sensor_name": "digitac",
-        # "tactile_sensor_name": "gelsight_mini",
+        "tactile_sensor_name": "gelsight_mini",
 
         # the type of control used
         'control_mode': 'TCP_position_control',
